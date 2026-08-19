@@ -25,6 +25,13 @@ public class Gun : MonoBehaviour
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
+
+            //查找被击中对象身上是否有Target.cs脚本(因为我们只需要在敌人身上挂载Target.cs脚本，建筑物等则不用)，而玩家在射击时，可能会打中建筑物，所以需要这个判断
+            Target target = hit.transform.GetComponent<Target>();
+            if(target != null)
+            {
+                target.TakeDamage(damage);
+            }
         }
     }
 }
