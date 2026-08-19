@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [Header("摄像机")]
     //为了从摄像机射出光线，我们必须要有一个关于摄像机的引用变量
     public Camera fpsCam;
+    public ParticleSystem muzzleFlash; //粒子系统
 
     void Update()
     {
@@ -20,6 +21,7 @@ public class Gun : MonoBehaviour
     }
     public void Shoot()
     {
+        muzzleFlash.Play();
         RaycastHit hit;   //用于保存射线打出的所有信息
         //此函数：如果击中目标则返回true，如果没有集中目标就返回false
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
